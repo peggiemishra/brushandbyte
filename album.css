@@ -1,58 +1,169 @@
-body {
-  min-height: 75rem; /* Can be removed; just added for demo purposes */
+/* album.css - Updated styling for Brushes and Bytes portfolio */
+
+:root{
+  --bg:#1f1f1f;       /* site background (dark grey) */
+  --panel:#111;       /* inner panel color */
+  --accent:#fff;      /* text & borders */
+  --muted:#cfcfcf;    /* secondary text */
 }
 
+html,body{
+  height:100%;
+  margin:0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background:var(--bg);
+  color:var(--accent);
+}
+
+/* header / navbar */
 .navbar {
-  margin-bottom: 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 1rem 0;
 }
 
-.jumbotron {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  margin-bottom: 0;
-  background-color: #fff;
+.navbar-brand{
+  color:var(--accent);
+  font-weight:600;
+  letter-spacing:0.06em;
 }
 
-.jumbotron p:last-child {
-  margin-bottom: 0;
-}
-
-.jumbotron-heading {
-  font-weight: 300;
-}
-
-.jumbotron .container {
-  max-width: 40rem;
-}
-
-.album {
-  min-height: 50rem; /* Can be removed; just added for demo purposes */
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  background-color: #f7f7f7;
-}
-
-.card {
-  float: left;
-  width: 33.333%;
-  padding: .75rem;
+/* welcome panel */
+.jumbotron{
+  background: transparent;
+  padding-top:3rem;
+  padding-bottom:2rem;
   margin-bottom: 2rem;
-  border: 0;
+  text-align:center;
 }
 
-.card > img {
-  margin-bottom: .75rem;
+.welcome-box{
+  display:inline-flex;
+  align-items:center;
+  gap:1rem;
+  padding:1rem 2rem;
+  border-radius:12px;
+  border:2px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  color:var(--accent);
 }
 
-.card-text {
-  font-size: 85%;
+.welcome-box img{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  border-radius:8px;
+  background: linear-gradient(135deg,#fff6,#fff0);
+  padding:6px;
 }
 
-footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+/* heading inside welcome */
+.jumbotron-heading{
+  margin:0;
+  font-size:1.6rem;
+  font-weight:500;
 }
 
-footer p {
-  margin-bottom: .25rem;
+/* subheading */
+.lead {
+  color:var(--muted);
+  margin-top: .25rem;
+  margin-bottom: 0;
+  font-size: .95rem;
+}
+
+/* gallery area */
+.album{
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+/* use flexbox grid */
+.card-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2.25rem;
+  justify-content:flex-start;
+  margin-top:2rem;
+}
+
+/* card styles */
+.card {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.12);
+  width: calc(25% - 1.6875rem); /* 4 columns */
+  min-width:200px;
+  padding: 0.75rem;
+  box-sizing:border-box;
+  border-radius:2px;
+}
+
+.card img{
+  display:block;
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  margin-bottom:0.8rem;
+  transition: transform .28s ease, filter .28s ease;
+  cursor: pointer;
+  filter:brightness(.95);
+}
+
+.card img:hover{
+  transform: scale(1.02);
+  filter:brightness(1);
+}
+
+/* caption inside card */
+.card-text{
+  text-align:center;
+  font-size:0.95rem;
+  color:var(--accent);
+  font-weight:500;
+  padding:0.4rem 0;
+}
+
+/* footer */
+footer{
+  padding:2.5rem 0;
+  color:var(--muted);
+  text-align:center;
+  border-top:1px solid rgba(255,255,255,0.03);
+  margin-top:3rem;
+}
+
+/* modal image */
+.modal-body{
+  background:transparent;
+}
+
+.img-responsive{
+  width:100%;
+  height:auto;
+  display:block;
+  max-height:80vh;
+  margin:0 auto;
+  object-fit:contain;
+}
+
+/* responsive tweaks */
+@media (max-width:1000px){
+  .card{ width: calc(33.333% - 1.5rem); } /* 3 columns */
+}
+
+@media (max-width:720px){
+  .welcome-box{ padding:0.8rem 1rem; gap:0.6rem; }
+  .welcome-box img{ width:48px; height:48px; }
+  .jumbotron-heading{ font-size:1.2rem; }
+  .card{ width: calc(50% - 1rem); } /* 2 columns */
+  .card img{ height:130px; }
+}
+
+@media (max-width:420px){
+  .card{ width: 100%; }
+  .card img{ height:200px; }
+  .lead{ font-size:.9rem; }
 }
