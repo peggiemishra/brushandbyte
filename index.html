@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Brushes and Bytes — Peggie Mishra</title>
 
-    <!-- Bootstrap (kept for modal + utilities) -->
+    <!-- Bootstrap (for layout + modal) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
 
     <!-- Your styles -->
@@ -13,6 +13,7 @@
   </head>
   <body>
 
+    <!-- Header -->
     <header>
       <nav class="navbar">
         <div class="container d-flex justify-content-between">
@@ -22,13 +23,12 @@
       </nav>
     </header>
 
+    <!-- Main -->
     <main role="main">
-
-      <!-- Welcome -->
+      <!-- Welcome Section -->
       <section class="jumbotron text-center">
         <div class="container">
           <div class="welcome-box" role="banner">
-            <!-- <- Place your brush+paint image at images/brush-paint.png -->
             <img src="images/brush-paint.png" alt="brush and paint">
             <div>
               <h1 class="jumbotron-heading">Welcome to Brushes and Bytes</h1>
@@ -41,46 +41,8 @@
       <!-- Gallery -->
       <div class="album">
         <div class="container">
-
-          <div class="card-grid">
-            <div class="card">
-              <img src="images/lucas-amunategui-drowning.JPG" alt="Drowning 2017" data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Drowning — 2017</p>
-            </div>
-
-            <div class="card">
-              <img src="images/lucas-amunategui-charcoal.JPG" alt="Charcoal 2017" data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Charcoal — 2017</p>
-            </div>
-
-            <div class="card">
-              <img src="images/lucas-amunategui-building.JPG" alt="Building 2017" data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Building — 2017</p>
-            </div>
-
-            <div class="card">
-              <img src="images/lucas-amunategui-nose.jpg" alt="Face 1" data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Face 1 — 2017</p>
-            </div>
-
-            <div class="card">
-              <img src="images/lucas-amunategui-face-2.JPG" alt="Face 2" data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Face 2 — 2017</p>
-            </div>
-
-            <div class="card">
-              <img src="images/lucas-amunategui-face-3.JPG" alt="Face 3" data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Face 3 — 2017</p>
-            </div>
-
-            <!-- add more cards as needed -->
-            <div class="card">
-              <img src="images/placeholder-1.jpg" alt="More work" data-toggle="modal" data-target="#myModal">
-              <p class="card-text">And so on — unlimited images down</p>
-            </div>
-
-          </div> <!-- .card-grid -->
-
+          <!-- The script will fill this automatically -->
+          <div class="card-grid"></div>
         </div>
       </div>
 
@@ -97,9 +59,9 @@
           </div>
         </div>
       </div>
-
     </main>
 
+    <!-- Footer -->
     <footer>
       <div class="container">
         <p>Brushes & Bytes • Peggie Mishra</p>
@@ -111,15 +73,58 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
+    <!-- Gallery auto-generator -->
     <script>
-      // open clicked image in modal
-      $(document).ready(function () {
-        $('#myModal').on('show.bs.modal', function (e) {
-          var image = $(e.relatedTarget).attr('src');
-          $(".img-responsive").attr("src", image);
-        });
-      });
-    </script>
+    /*
+      Auto-generates the gallery grid from all image files
+      inside your public GitHub repo's "images/" folder.
+      Works automatically whenever you add new files there.
+    */
+    $(function(){
+      const owner = 'peggiemishra';
+      const repo  = 'brushandbyte';   // make sure this matches your repo name
+      const branch = 'main';          // or 'master' if that's your default
+      const imagesPath = 'images';
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${imagesPath}?ref=${branch}`;
+      const $grid = $('.card-grid');
+      const imageExt = /\.(jpe?g|png|gif|webp|svg)$/i;
 
+      function tidyCaption(filename){
+        const name = filename.replace(imageExt, '').replace(/[-_]+/g, ' ').trim();
+        return name.split(' ').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+      }
+
+      $.getJSON(apiUrl)
+        .done(files => {
+          const images = files.filter(f => imageExt.test(f.name));
+          if(!images.length){
+            $grid.append('<p style="color:#999">No images found in your images/ folder yet.</p>');
+            return;
+          }
+
+          images.forEach(f => {
+            const imgUrl = f.download_url;
+            const caption = tidyCaption(f.name);
+            const $card = $(`
+              <div class="card">
+                <img src="${imgUrl}" alt="${caption}" loading="lazy" data-toggle="modal" data-target="#myModal">
+                <p class="card-text">${caption}</p>
+              </div>
+            `);
+            $grid.append($card);
+          });
+        })
+        .fail(err => {
+          console.warn('Could not load images automatically.', err);
+          $grid.append('<p style="color:#f88">Failed to load images automatically. (Is the repo public?)</p>');
+        });
+
+      // Modal behavior
+      $('#myModal').on('show.bs.modal', function (e) {
+        var image = $(e.relatedTarget).attr('src');
+        $(".img-responsive").attr("src", image);
+      });
+    });
+    </script>
   </body>
 </html>
