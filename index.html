@@ -68,25 +68,20 @@
       </div>
     </footer>
 
-    <!-- JS (jQuery, Popper, Bootstrap) -->
+    <!-- Bootstrap JS (slim jQuery is fine now) -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <!-- Gallery auto-generator -->
+    <!-- Gallery auto-generator (fetch-based, no jQuery AJAX) -->
     <script>
-    /*
-      Auto-generates the gallery grid from all image files
-      inside your public GitHub repo's "images/" folder.
-      Works automatically whenever you add new files there.
-    */
-    $(function(){
+    (function(){
       const owner = 'peggiemishra';
-      const repo  = 'brushandbyte';   // make sure this matches your repo name
-      const branch = 'main';          // or 'master' if that's your default
+      const repo  = 'brushandbyte';   // your repo
+      const branch = 'main';          // or 'master'
       const imagesPath = 'images';
       const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${imagesPath}?ref=${branch}`;
-      const $grid = $('.card-grid');
+      const grid = document.querySelector('.card-grid');
       const imageExt = /\.(jpe?g|png|gif|webp|svg)$/i;
 
       function tidyCaption(filename){
@@ -94,37 +89,65 @@
         return name.split(' ').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
       }
 
-      $.getJSON(apiUrl)
-        .done(files => {
+      function showError(msg){
+        const p = document.createElement('p');
+        p.style.color = '#f88';
+        p.textContent = msg;
+        grid.appendChild(p);
+      }
+
+      fetch(apiUrl)
+        .then(res => {
+          if(!res.ok) throw new Error('GitHub API error ' + res.status);
+          return res.json();
+        })
+        .then(files => {
           const images = files.filter(f => imageExt.test(f.name));
           if(!images.length){
-            $grid.append('<p style="color:#999">No images found in your images/ folder yet.</p>');
+            const p = document.createElement('p');
+            p.style.color = '#999';
+            p.textContent = 'No images found in your images/ folder yet.';
+            grid.appendChild(p);
             return;
           }
 
           images.forEach(f => {
             const imgUrl = f.download_url;
             const caption = tidyCaption(f.name);
-            const $card = $(`
-              <div class="card">
-                <img src="${imgUrl}" alt="${caption}" loading="lazy" data-toggle="modal" data-target="#myModal">
-                <p class="card-text">${caption}</p>
-              </div>
-            `);
-            $grid.append($card);
+
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const img = document.createElement('img');
+            img.src = imgUrl;
+            img.alt = caption;
+            img.setAttribute('loading','lazy');
+            img.setAttribute('data-toggle','modal');
+            img.setAttribute('data-target','#myModal');
+            img.style.cursor = 'pointer';
+
+            const p = document.createElement('p');
+            p.className = 'card-text';
+            p.textContent = caption;
+
+            card.appendChild(img);
+            card.appendChild(p);
+            grid.appendChild(card);
+
+            img.addEventListener('click', function(){
+              const modalImg = document.querySelector('.img-responsive');
+              modalImg.src = imgUrl;
+              if (typeof $ === 'function' && typeof $.fn.modal === 'function') {
+                $('#myModal').modal('show');
+              }
+            });
           });
         })
-        .fail(err => {
-          console.warn('Could not load images automatically.', err);
-          $grid.append('<p style="color:#f88">Failed to load images automatically. (Is the repo public?)</p>');
+        .catch(err => {
+          console.warn(err);
+          showError('Failed to load images automatically. (Check console for details.)');
         });
-
-      // Modal behavior
-      $('#myModal').on('show.bs.modal', function (e) {
-        var image = $(e.relatedTarget).attr('src');
-        $(".img-responsive").attr("src", image);
-      });
-    });
+    })();
     </script>
   </body>
 </html>
