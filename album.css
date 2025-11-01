@@ -1,169 +1,90 @@
-/* album.css - Updated styling for Brushes and Bytes portfolio */
-
-:root{
-  --bg:#1f1f1f;       /* site background (dark grey) */
-  --panel:#111;       /* inner panel color */
-  --accent:#fff;      /* text & borders */
-  --muted:#cfcfcf;    /* secondary text */
+/* General reset */
+body {
+  background-color: #e9ecef;
+  color: #333;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-html,body{
-  height:100%;
-  margin:0;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background:var(--bg);
-  color:var(--accent);
-}
-
-/* header / navbar */
+/* Navbar */
 .navbar {
-  background: transparent;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  padding: 1rem 0;
+  background: #212529 !important;
 }
 
-.navbar-brand{
-  color:var(--accent);
-  font-weight:600;
-  letter-spacing:0.06em;
+/* Welcome Section */
+.welcome-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-/* welcome panel */
-.jumbotron{
-  background: transparent;
-  padding-top:3rem;
-  padding-bottom:2rem;
-  margin-bottom: 2rem;
-  text-align:center;
+.welcome-img {
+  width: 120px;
+  height: auto;
+  opacity: 0.9;
 }
 
-.welcome-box{
-  display:inline-flex;
-  align-items:center;
-  gap:1rem;
-  padding:1rem 2rem;
-  border-radius:12px;
-  border:2px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.02);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-  color:var(--accent);
+/* Gallery grid */
+.album {
+  background-color: #d6d8d9;
 }
 
-.welcome-box img{
-  width:72px;
-  height:72px;
-  object-fit:contain;
-  border-radius:8px;
-  background: linear-gradient(135deg,#fff6,#fff0);
-  padding:6px;
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 1.2rem;
 }
 
-/* heading inside welcome */
-.jumbotron-heading{
-  margin:0;
-  font-size:1.6rem;
-  font-weight:500;
-}
-
-/* subheading */
-.lead {
-  color:var(--muted);
-  margin-top: .25rem;
-  margin-bottom: 0;
-  font-size: .95rem;
-}
-
-/* gallery area */
-.album{
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-  max-width:1200px;
-  margin:0 auto;
-}
-
-/* use flexbox grid */
-.card-grid{
-  display:flex;
-  flex-wrap:wrap;
-  gap:2.25rem;
-  justify-content:flex-start;
-  margin-top:2rem;
-}
-
-/* card styles */
 .card {
-  background: transparent;
-  border: 2px solid rgba(255,255,255,0.12);
-  width: calc(25% - 1.6875rem); /* 4 columns */
-  min-width:200px;
-  padding: 0.75rem;
-  box-sizing:border-box;
-  border-radius:2px;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-align: center;
 }
 
-.card img{
-  display:block;
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  margin-bottom:0.8rem;
-  transition: transform .28s ease, filter .28s ease;
-  cursor: pointer;
-  filter:brightness(.95);
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.card img:hover{
-  transform: scale(1.02);
-  filter:brightness(1);
+.card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
 }
 
-/* caption inside card */
-.card-text{
-  text-align:center;
-  font-size:0.95rem;
-  color:var(--accent);
-  font-weight:500;
-  padding:0.4rem 0;
+.card-text {
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  color: #444;
 }
 
-/* footer */
-footer{
-  padding:2.5rem 0;
-  color:var(--muted);
-  text-align:center;
-  border-top:1px solid rgba(255,255,255,0.03);
-  margin-top:3rem;
+/* Modal overlay */
+.modal-content {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
-/* modal image */
-.modal-body{
-  background:transparent;
+.modal-body img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
 }
 
-.img-responsive{
-  width:100%;
-  height:auto;
-  display:block;
-  max-height:80vh;
-  margin:0 auto;
-  object-fit:contain;
+/* Footer */
+footer {
+  font-size: 0.9rem;
+  background: #212529;
+  color: #ddd;
+  text-align: center;
 }
 
-/* responsive tweaks */
-@media (max-width:1000px){
-  .card{ width: calc(33.333% - 1.5rem); } /* 3 columns */
-}
-
-@media (max-width:720px){
-  .welcome-box{ padding:0.8rem 1rem; gap:0.6rem; }
-  .welcome-box img{ width:48px; height:48px; }
-  .jumbotron-heading{ font-size:1.2rem; }
-  .card{ width: calc(50% - 1rem); } /* 2 columns */
-  .card img{ height:130px; }
-}
-
-@media (max-width:420px){
-  .card{ width: 100%; }
-  .card img{ height:200px; }
-  .lead{ font-size:.9rem; }
+footer p {
+  margin: 0;
 }
