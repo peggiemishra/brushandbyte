@@ -1,56 +1,32 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     <title>Brushes and Bytes — Peggie Mishra</title>
 
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <!-- Custom styles -->
     <link href="album.css" rel="stylesheet">
   </head>
-
   <body>
 
-    <!-- Main -->
     <main role="main">
 
-      <!-- Welcome Section -->
-      <section class="jumbotron text-center bg-light mb-0">
+      <!-- Welcome Section (black background, beige text) -->
+      <section class="jumbotron text-center welcome-dark mb-0">
         <div class="container">
           <div class="welcome-box">
-            <!-- Inline SVG brush + paint -->
-            <svg class="welcome-img" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#f6a" />
-                  <stop offset="1" stop-color="#6cf" />
-                </linearGradient>
-                <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#fff7" />
-                  <stop offset="1" stop-color="#0000" />
-                </linearGradient>
-              </defs>
-
-              <rect x="6" y="6" width="108" height="108" rx="10" ry="10" fill="#f5f5f5" stroke="#e0e0e0" />
-              <path d="M82 26c-6 6-14 14-14 24 0 9 7 16 16 16s18-7 18-16c0-11-10-20-20-24z"
-                    fill="url(#g1)" opacity="0.95" transform="translate(6,6) scale(0.9)"/>
-              <g transform="translate(12,54) rotate(-22 30 12)">
-                <rect x="0" y="0" width="56" height="10" rx="3" fill="#6b6b6b" />
-                <rect x="4" y="-10" width="12" height="20" rx="2" fill="#caa97a" />
-                <rect x="44" y="-10" width="12" height="20" rx="2" fill="#d8c3a5" />
-              </g>
-              <g transform="translate(66,24) rotate(20)">
-                <rect x="0" y="0" width="18" height="6" rx="2" fill="#3a3a3a" />
-                <rect x="0" y="6" width="14" height="4" rx="1.5" fill="#5a5a5a" />
-              </g>
-              <ellipse cx="78" cy="28" rx="14" ry="20" fill="url(#g2)" />
-            </svg>
-
             <div>
-              <h1 class="display-5 mt-3">Welcome to Brushes and Bytes</h1>
-              <p class="lead text-muted">A hand-coded portfolio where pigment meets pixels.</p>
+              <h1 class="welcome-title">Welcome to Brushes and Bytes</h1>
+              <p class="welcome-sub">A hand-coded portfolio where pigment meets pixels.</p>
+            </div>
+
+            <!-- Logo image placed AFTER the title/subtitle, centered -->
+            <div class="logo-wrap">
+              <img src="images/logo.png" alt="Brushes and Bytes logo" class="logo-img">
             </div>
           </div>
         </div>
@@ -76,19 +52,21 @@
           </div>
         </div>
       </div>
+
     </main>
 
-    <!-- Footer -->
     <footer class="text-center py-4 bg-dark text-light">
       <div class="container small">
         <p class="mb-0">© Brushes & Bytes • Peggie Mishra</p>
       </div>
     </footer>
 
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
+    <!-- Manual Gallery Tiles -->
     <script>
     (function() {
       const images = [
@@ -130,5 +108,6 @@
       });
     })();
     </script>
+
   </body>
 </html>
