@@ -6,54 +6,57 @@
     <title>Brushes and Bytes — Peggie Mishra</title>
 
     <!-- Bootstrap (for layout + modal) -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          crossorigin="anonymous">
 
-    <!-- Your styles -->
+    <!-- Custom styles -->
     <link href="album.css" rel="stylesheet">
   </head>
+
   <body>
 
     <!-- Header -->
     <header>
-      <nav class="navbar">
-        <div class="container d-flex justify-content-between">
-          <a class="navbar-brand" href="#">Brushes & Bytes</a>
-          <div class="text-muted">Creations : Peggie Mishra</div>
+      <nav class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+          <a class="navbar-brand font-weight-bold" href="#">Brushes & Bytes</a>
+          <span class="text-light small">Creations by Peggie Mishra</span>
         </div>
       </nav>
     </header>
 
     <!-- Main -->
     <main role="main">
+
       <!-- Welcome Section -->
-      <section class="jumbotron text-center">
+      <section class="jumbotron text-center bg-light mb-0">
         <div class="container">
-          <div class="welcome-box" role="banner">
-            <img src="images/brush-paint.png" alt="brush and paint">
-            <div>
-              <h1 class="jumbotron-heading">Welcome to Brushes and Bytes</h1>
-              <p class="lead text-muted">A hand-coded portfolio where pigment meets pixels.</p>
-            </div>
+          <div class="welcome-box">
+            <img src="images/brush-paint.png" alt="brush and paint" class="welcome-img mb-4">
+            <h1 class="display-5">Welcome to Brushes and Bytes</h1>
+            <p class="lead text-muted">
+              A hand-coded portfolio where pigment meets pixels.
+            </p>
           </div>
         </div>
       </section>
 
       <!-- Gallery -->
-      <div class="album">
+      <div class="album py-5">
         <div class="container">
-          <!-- The script will fill this automatically -->
           <div class="card-grid"></div>
         </div>
       </div>
 
-      <!-- Modal for large image view -->
-      <div id="myModal" class="modal fade" role="dialog">
+      <!-- Modal -->
+      <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content" style="background:transparent;border:0;">
-            <div class="modal-body">
-              <img class="img-responsive" src="" alt="expanded view" />
+          <div class="modal-content bg-transparent border-0">
+            <div class="modal-body p-0 text-center">
+              <img class="img-responsive" src="" alt="expanded view" style="max-width:100%;height:auto;">
             </div>
-            <div class="modal-footer" style="border-top:0;background:transparent;">
+            <div class="modal-footer border-0 justify-content-center bg-transparent">
               <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -62,92 +65,59 @@
     </main>
 
     <!-- Footer -->
-    <footer>
-      <div class="container">
-        <p>Brushes & Bytes • Peggie Mishra</p>
+    <footer class="text-center py-4 bg-dark text-light">
+      <div class="container small">
+        <p class="mb-0">© Brushes & Bytes • Peggie Mishra</p>
       </div>
     </footer>
 
-    <!-- Bootstrap JS (slim jQuery is fine now) -->
+    <!-- JS (Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <!-- Gallery auto-generator (fetch-based, no jQuery AJAX) -->
+    <!-- Manual Gallery Tiles -->
     <script>
-    (function(){
-      const owner = 'peggiemishra';
-      const repo  = 'brushandbyte';   // your repo
-      const branch = 'main';          // or 'master'
-      const imagesPath = 'images';
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${imagesPath}?ref=${branch}`;
-      const grid = document.querySelector('.card-grid');
-      const imageExt = /\.(jpe?g|png|gif|webp|svg)$/i;
+    (function() {
+      const images = [
+        { file: "LadybytheWindow.png",      title: "Lady by the Window" },
+        { file: "RajasthaniBride.png",      title: "Rajasthani Bride" },
+        { file: "BengaliWomen.png",         title: "Bengali Women" },
+        { file: "Bandanagal.png",           title: "Bandanagal" },
+        { file: "Hugs.png",                 title: "Hugs" },
+        { file: "Flowergal.png",            title: "Flower Gal" },
+        { file: "Eyesofawoman.png",         title: "Eyes of a Woman" },
+        { file: "SareeWomen.png",           title: "Saree Women" },
+        { file: "WomenSmellingLotus.png",   title: "Women Smelling Lotus" },
+        { file: "Christmas.png",            title: "Christmas" },
+        { file: "CoffeeandSketch.png",      title: "Coffee and Sketch" },
+        { file: "LadywithFlowers.png",      title: "Lady with Flowers" },
+        { file: "DurgaMaa.png",             title: "Durga Maa" },
+        { file: "RadheKrishna.png",         title: "Radhe Krishna" },
+        { file: "CocktailWoman.png",        title: "Cocktail Woman" },
+        { file: "BlueGown.png",             title: "Blue Gown" },
+        { file: "TheRedDress.png",          title: "The Red Dress" }
+      ];
 
-      function tidyCaption(filename){
-        const name = filename.replace(imageExt, '').replace(/[-_]+/g, ' ').trim();
-        return name.split(' ').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
-      }
+      const grid = document.querySelector(".card-grid");
 
-      function showError(msg){
-        const p = document.createElement('p');
-        p.style.color = '#f88';
-        p.textContent = msg;
-        grid.appendChild(p);
-      }
+      images.forEach(img => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="images/${img.file}" alt="${img.title}" loading="lazy"
+               data-toggle="modal" data-target="#myModal">
+          <p class="card-text">${img.title}</p>
+        `;
+        grid.appendChild(card);
+      });
 
-      fetch(apiUrl)
-        .then(res => {
-          if(!res.ok) throw new Error('GitHub API error ' + res.status);
-          return res.json();
-        })
-        .then(files => {
-          const images = files.filter(f => imageExt.test(f.name));
-          if(!images.length){
-            const p = document.createElement('p');
-            p.style.color = '#999';
-            p.textContent = 'No images found in your images/ folder yet.';
-            grid.appendChild(p);
-            return;
-          }
-
-          images.forEach(f => {
-            const imgUrl = f.download_url;
-            const caption = tidyCaption(f.name);
-
-            const card = document.createElement('div');
-            card.className = 'card';
-
-            const img = document.createElement('img');
-            img.src = imgUrl;
-            img.alt = caption;
-            img.setAttribute('loading','lazy');
-            img.setAttribute('data-toggle','modal');
-            img.setAttribute('data-target','#myModal');
-            img.style.cursor = 'pointer';
-
-            const p = document.createElement('p');
-            p.className = 'card-text';
-            p.textContent = caption;
-
-            card.appendChild(img);
-            card.appendChild(p);
-            grid.appendChild(card);
-
-            img.addEventListener('click', function(){
-              const modalImg = document.querySelector('.img-responsive');
-              modalImg.src = imgUrl;
-              if (typeof $ === 'function' && typeof $.fn.modal === 'function') {
-                $('#myModal').modal('show');
-              }
-            });
-          });
-        })
-        .catch(err => {
-          console.warn(err);
-          showError('Failed to load images automatically. (Check console for details.)');
-        });
+      $('#myModal').on('show.bs.modal', function (e) {
+        var image = $(e.relatedTarget).attr('src');
+        $(".img-responsive").attr("src", image);
+      });
     })();
     </script>
+
   </body>
 </html>
