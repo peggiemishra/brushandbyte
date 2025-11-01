@@ -3,135 +3,123 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="images/favicon.ico">
+    <title>Brushes and Bytes — Peggie Mishra</title>
 
-    <title>Album example for Bootstrap</title>
+    <!-- Bootstrap (kept for modal + utilities) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
 
-    <!-- Bootstrap core CSS -->
-   <!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
+    <!-- Your styles -->
     <link href="album.css" rel="stylesheet">
   </head>
-
   <body>
 
     <header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">When I am inspired, I draw. When inspired by what I drew, I share. Thanks for looking!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="navbar navbar-dark bg-dark">
+      <nav class="navbar">
         <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand">Album</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <a class="navbar-brand" href="#">Brushes & Bytes</a>
+          <div class="text-muted">Creations : Peggie Mishra</div>
         </div>
-      </div>
+      </nav>
     </header>
 
     <main role="main">
 
+      <!-- Welcome -->
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Lucas Amunategui</h1>
-          <p class="lead text-muted">Art Portfolio</p>
+          <div class="welcome-box" role="banner">
+            <!-- <- Place your brush+paint image at images/brush-paint.png -->
+            <img src="images/brush-paint.png" alt="brush and paint">
+            <div>
+              <h1 class="jumbotron-heading">Welcome to Brushes and Bytes</h1>
+              <p class="lead text-muted">A hand-coded portfolio where pigment meets pixels.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <div class="album text-muted">
+      <!-- Gallery -->
+      <div class="album">
         <div class="container">
 
-          <div class="row">
+          <div class="card-grid">
             <div class="card">
-              <img src="images/lucas-amunategui-drowning.JPG" alt="image 2017" style="width:100%"  
-                   data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Drowning 2017</p>
+              <img src="images/lucas-amunategui-drowning.JPG" alt="Drowning 2017" data-toggle="modal" data-target="#myModal">
+              <p class="card-text">Drowning — 2017</p>
             </div>
+
             <div class="card">
-              <img src="images/lucas-amunategui-charcoal.JPG" alt="image 2017" style="width:100%"  
-               data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Charcoal 2017</p>
+              <img src="images/lucas-amunategui-charcoal.JPG" alt="Charcoal 2017" data-toggle="modal" data-target="#myModal">
+              <p class="card-text">Charcoal — 2017</p>
             </div>
+
             <div class="card">
-              <img src="images/lucas-amunategui-building.JPG" alt="image 2017" style="width:100%"
-                   data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Building 2017</p>            
+              <img src="images/lucas-amunategui-building.JPG" alt="Building 2017" data-toggle="modal" data-target="#myModal">
+              <p class="card-text">Building — 2017</p>
             </div>
-             <div class="card">
-              <img src="images/lucas-amunategui-nose.jpg" alt="image 2017" style="width:100%"  
-                   data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Face 1 2017</p>
-            </div>
+
             <div class="card">
-              <img src="images/lucas-amunategui-face-2.JPG" alt="image 2017" style="width:100%"  
-               data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Face 2 2017</p>
+              <img src="images/lucas-amunategui-nose.jpg" alt="Face 1" data-toggle="modal" data-target="#myModal">
+              <p class="card-text">Face 1 — 2017</p>
             </div>
+
             <div class="card">
-              <img src="images/lucas-amunategui-face-3.JPG" alt="image 2017" style="width:100%"
-                   data-toggle="modal" data-target="#myModal">
-              <p class="card-text">Face 3 2017</p>            
+              <img src="images/lucas-amunategui-face-2.JPG" alt="Face 2" data-toggle="modal" data-target="#myModal">
+              <p class="card-text">Face 2 — 2017</p>
             </div>
-            
-          </div>
+
+            <div class="card">
+              <img src="images/lucas-amunategui-face-3.JPG" alt="Face 3" data-toggle="modal" data-target="#myModal">
+              <p class="card-text">Face 3 — 2017</p>
+            </div>
+
+            <!-- add more cards as needed -->
+            <div class="card">
+              <img src="images/placeholder-1.jpg" alt="More work" data-toggle="modal" data-target="#myModal">
+              <p class="card-text">And so on — unlimited images down</p>
+            </div>
+
+          </div> <!-- .card-grid -->
 
         </div>
       </div>
 
-      
+      <!-- Modal for large image view -->
       <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content" style="background:transparent;border:0;">
             <div class="modal-body">
-                <img class="img-responsive" src="" />
+              <img class="img-responsive" src="" alt="expanded view" />
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="modal-footer" style="border-top:0;background:transparent;">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-      
- 
-      
-       
- </main>
+      </div>
 
-    <footer class="text-muted">
+    </main>
+
+    <footer>
       <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        <p>Brushes & Bytes • Peggie Mishra</p>
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- JS (jQuery, Popper, Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
     <script>
-    $(document).ready(function () {
-            $('#myModal').on('show.bs.modal', function (e) {
-                var image = $(e.relatedTarget).attr('src');
-                $(".img-responsive").attr("src", image);
-            });
-    });
-    </script> 
+      // open clicked image in modal
+      $(document).ready(function () {
+        $('#myModal').on('show.bs.modal', function (e) {
+          var image = $(e.relatedTarget).attr('src');
+          $(".img-responsive").attr("src", image);
+        });
+      });
+    </script>
+
   </body>
 </html>
